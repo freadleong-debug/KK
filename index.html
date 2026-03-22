@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>製藥工作臺 - 調配挑戰</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #2b7a6e 0%, #1e5a50 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Quicksand', 'Poppins', 'Comic Neue', system-ui, -apple-system, 'Chalkboard SE', cursive, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .workspace {
+            max-width: 1400px;
+            width: 100%;
+            background-color: #c3e8e0;
+            border-radius: 64px 48px 64px 48px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255,255,255,0.6);
+            padding: 24px 28px 32px;
+            transition: all 0.2s;
+        }
+
+        .bordered {
+            border: 3px solid #2c5a4f;
+            border-radius: 32px;
+            background-color: #fef9e8;
+            box-shadow: 0 6px 0 #1e3e35;
+            transition: 0.07s linear;
+        }
+        .bordered:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #1e3e35;
+        }
+
+        input, button {
+            font-family: inherit;
+        }
+        button {
+            cursor: pointer;
+            font-weight: bold;
+            background: #ffde9c;
+            border: none;
+            font-size: 1.1rem;
+            padding: 8px 20px;
+        }
+        button:active {
+            transform: translateY(2px);
+        }
+
+        .title-area {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .title-area h1 {
+            font-size: 3rem;
+            margin: 0;
+            display: inline-block;
+            padding: 12px 32px;
+            background: #fff1c1;
+            border-radius: 60px;
+            letter-spacing: 4px;
+            color: #1f4e43;
+            text-shadow: 3px 3px 0 #b9d8ce;
+            box-shadow: 0 8px 0 #7c9f92;
+        }
+        /* 操作提示放在大標題下方 */
+        .operation-hint {
+            margin-top: 16px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .hint-badge {
+            display: inline-block;
+            background: #f9eec1;
+            border: 3px solid #548072;
+            border-radius: 60px;
+            padding: 8px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2c5a4f;
+            box-shadow: 0 3px 0 #8faa9e;
+            backdrop-filter: blur(2px);
+        }
+        .hint-badge span {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .double-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .left-panel {
+            flex: 1.2;
+            min-width: 240px;
+        }
+        .right-panel {
+            flex: 1.8;
+            min-width: 280px;
+        }
+
+        .medicine-box {
+            background: #ffeed5;
+            border-radius: 48px;
+            padding: 24px 20px;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .medicine-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .start-btn {
+            background: #f3b33d;
+            color: #2d3e36;
+            font-size: 1.7rem;
+            padding: 12px 20px;
+            width: 80%;
+            border-radius: 60px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 7px 0 #b4621a;
+            transition: 0.05s linear;
+        }
+        .start-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b4621a;
+        }
+
+        .target-ratio-box {
+            background: #f2e5cf;
+            padding: 18px;
+            border-radius: 48px;
+            text-align: center;
+        }
+        .target-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: #d9c79a;
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+        }
+        .target-value {
+            font-size: 3rem;
+            font-weight: bold;
+            background: white;
+            display: inline-block;
+            padding: 8px 30px;
+            border-radius: 60px;
+            font-family: monospace;
+            letter-spacing: 4px;
+            color: #2c6b5c;
+        }
+
+        .input-card {
+            background: #fffaf0;
+            padding: 20px;
+            border-radius: 48px;
+            margin-bottom: 20px;
+        }
+        .ratio-input-group {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .ratio-input-group input {
+            width: 130px;
+            font-size: 1.8rem;
+            text-align: center;
+            border: 3px solid #548072;
+            border-radius: 40px;
+            background: white;
+            padding: 8px 0;
+            font-weight: bold;
+            outline: none;
+        }
+        .ratio-input-group input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .ratio-input-group input[type="number"]::-webkit-inner-spin-button,
+        .ratio-input-group input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.5;
+        }
+        .ratio-colon {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3f6a5e;
+        }
+        .confirm-btn {
+            background: #6ecfaa;
+            font-size: 1.3rem;
+            padding: 8px 32px;
+            border-radius: 60px;
+            margin-top: 8px;
+        }
+
+        .effect-area {
+            min-height: 90px;
+            margin: 10px 0 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .success-effect {
+            animation: sparkle 0.6s ease-in-out;
+            background: radial-gradient(circle, gold, #ffb347);
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 60px;
+            color: #2d2b1f;
+            box-shadow: 0 0 20px #ffd966;
+        }
+        .fail-effect {
+            animation: shake 0.4s ease-in-out;
+            background: #f5b7a8;
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 60px;
+            color: #8b3c2c;
+            box-shadow: 0 0 10px #e67e5a;
+        }
+        @keyframes sparkle {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); background: #ffdd77; text-shadow: 0 0 8px white; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 48px;
+            background: #e5f3ef;
+            padding: 10px;
+        }
+        .record-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fef7e6;
+            border-radius: 32px;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+        .record-table th, .record-table td {
+            border: 3px solid #578f7f;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .record-table th {
+            background: #c7e2d9;
+            font-size: 1.1rem;
+            color: #1f4e3c;
+        }
+        .check-mark {
+            font-size: 1.6rem;
+            color: #2b7a42;
+        }
+        .fail-mark {
+            font-size: 1.4rem;
+            color: #c95a49;
+        }
+
+        .info-tip {
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+            background: #ddddb0;
+            border-radius: 30px;
+            padding: 6px;
+            font-size: 0.95rem;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            font-family: inherit;
+        }
+        .modal-card {
+            background: #fff9ef;
+            border-radius: 64px;
+            padding: 28px 32px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border: 4px solid #2c5a4f;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+        }
+        .modal-card h3 {
+            font-size: 2rem;
+            margin: 0 0 12px;
+            color: #2d5a4c;
+        }
+        .modal-card p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .modal-input-group {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .modal-input-group input {
+            width: 130px;
+            font-size: 2rem;
+            text-align: center;
+            border: 3px solid #548072;
+            border-radius: 48px;
+            padding: 8px;
+            font-weight: bold;
+        }
+        .modal-input-group input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .modal-colon {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .modal-btn {
+            background: #6ecfaa;
+            font-size: 1.4rem;
+            padding: 10px 28px;
+            margin-top: 12px;
+            border-radius: 48px;
+        }
+        .modal-warning {
+            color: #c95a49;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .workspace { padding: 18px; }
+            .target-value { font-size: 2rem; }
+            .ratio-input-group input { width: 100px; font-size: 1.4rem; }
+            .modal-input-group input { width: 100px; font-size: 1.6rem; }
+            .hint-badge { font-size: 0.9rem; padding: 6px 16px; }
+        }
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 16px;
+            opacity: 0.8;
+            color: #2c5a4f;
+            background: #e0f0ea;
+            display: inline-block;
+            width: auto;
+            padding: 6px 20px;
+            border-radius: 40px;
+        }
+        .footer-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="workspace">
+    <div class="title-area">
+        <h1 class="bordered">🧪 製藥工作臺 🧴</h1>
+        <!-- 操作提示放在大標題下方，方便使用者了解操作 -->
+        <div class="operation-hint">
+            <div class="hint-bordered hint-badge">
+                <span>✨</span> 點擊開始製作，設定目標比，然後輸入調配比，看看是否成功 <span>✨</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="double-panel">
+        <div class="left-panel">
+            <div class="medicine-box bordered">
+                <div class="medicine-icon">💊🧪</div>
+                <button id="startMakeBtn" class="start-btn bordered">✨ 開始製作 ✨</button>
+                <div class="info-tip" style="margin-top:16px;">📌 點擊開始，設定目標比</div>
+            </div>
+
+            <div id="targetRatioArea" style="display: none;" class="target-ratio-box bordered">
+                <div class="target-label">🎯 今日目標比 🎯</div>
+                <div id="targetRatioDisplay" class="target-value">— : —</div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div id="dynamicInputArea" style="display: none;">
+                <div id="userInputCard" class="input-card bordered">
+                    <div style="font-weight: bold; font-size:1.2rem; text-align:center;">🧙 請輸入您的配方比 🧙</div>
+                    <div class="ratio-input-group">
+                        <input type="number" id="userFront" placeholder="前項" value="" step="any" inputmode="decimal" class="bordered" style="background:white;">
+                        <span class="ratio-colon">:</span>
+                        <input type="number" id="userBack" placeholder="後項" value="" step="any" inputmode="decimal" class="bordered" style="background:white;">
+                    </div>
+                    <div style="text-align:center;">
+                        <button id="confirmUserRatioBtn" class="confirm-btn bordered">📝 確認輸入</button>
+                    </div>
+                </div>
+
+                <div id="newRatioCard" style="display: none;" class="input-card bordered">
+                    <div style="font-weight: bold; font-size:1.2rem; text-align:center;">⚗️ 再次調配新配方 ⚗️</div>
+                    <div class="ratio-input-group">
+                        <input type="number" id="newFront" placeholder="前項" value="" step="any" inputmode="decimal" class="bordered">
+                        <span class="ratio-colon">:</span>
+                        <input type="number" id="newBack" placeholder="後項" value="" step="any" inputmode="decimal" class="bordered">
+                    </div>
+                    <div style="text-align:center;">
+                        <button id="submitNewRatioBtn" class="confirm-btn bordered">🔬 提交新比</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="effectMessage" class="effect-area"></div>
+
+    <div id="tableWrapper" style="display: none;" class="table-container bordered">
+        <table class="record-table">
+            <thead>
+                <tr><th>次數</th><th>目標比</th><th>使用者輸入比</th><th>製藥成功與否</th>
+                </tr>
+            </thead>
+            <tbody id="recordTableBody"></tbody>
+        </table>
+        <!-- 下方提示簡潔保留但不重複操作步驟，避免累贅 -->
+        <div class="info-tip">📊 記錄每次調配結果，看看哪些配方能成功！</div>
+    </div>
+    <div class="footer-container">
+        <footer>⚗️ 試試不同數字組合，探索成功的秘密 ⚗️</footer>
+    </div>
+</div>
+
+<script>
+    // ---------- 狀態管理 ----------
+    let targetRatio = null;          
+    let currentSessionActive = false;
+    let recordList = [];
+
+    // DOM 元素
+    const startBtn = document.getElementById('startMakeBtn');
+    const targetRatioArea = document.getElementById('targetRatioArea');
+    const targetRatioDisplay = document.getElementById('targetRatioDisplay');
+    const dynamicInputArea = document.getElementById('dynamicInputArea');
+    const userInputCard = document.getElementById('userInputCard');
+    const newRatioCard = document.getElementById('newRatioCard');
+    const confirmUserBtn = document.getElementById('confirmUserRatioBtn');
+    const submitNewBtn = document.getElementById('submitNewRatioBtn');
+    const tableWrapper = document.getElementById('tableWrapper');
+    const recordBody = document.getElementById('recordTableBody');
+    const effectDiv = document.getElementById('effectMessage');
+
+    const userFrontInput = document.getElementById('userFront');
+    const userBackInput = document.getElementById('userBack');
+    const newFrontInput = document.getElementById('newFront');
+    const newBackInput = document.getElementById('newBack');
+
+    // 讓所有數字輸入框支援小數，並且彈出數字鍵盤 (已透過 inputmode="decimal" 和 step="any" 實現)
+    function setupDecimalInputs() {
+        const numberInputs = [userFrontInput, userBackInput, newFrontInput, newBackInput];
+        numberInputs.forEach(input => {
+            if (input) {
+                input.step = "any";
+                input.inputMode = "decimal";
+            }
+        });
+    }
+
+    // 計算比值 (支援小數)
+    function computeRatioValue(front, back) {
+        if (back === 0 || back === null || isNaN(back)) return null;
+        return front / back;
+    }
+
+    function formatRatio(front, back) {
+        // 格式化顯示，小數點保留合適精度
+        const formatNum = (num) => {
+            if (Number.isInteger(num)) return num.toString();
+            // 小數點後最多保留4位，去掉多餘尾數0
+            let str = num.toFixed(6);
+            str = str.replace(/\.?0+$/, '');
+            return str;
+        };
+        return `${formatNum(front)} : ${formatNum(back)}`;
+    }
+
+    // 顯示目標比設定模態框 (支援小數輸入)
+    function showTargetInputModal() {
+        return new Promise((resolve) => {
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
+            modalOverlay.innerHTML = `
+                <div class="modal-card bordered">
+                    <h3>🧪 設定目標比 🧪</h3>
+                    <p>請輸入本次製藥的目標比值（前項 : 後項）</p>
+                    <div class="modal-input-group">
+                        <input type="number" id="modalFront" placeholder="前項" value="2" step="any" inputmode="decimal" class="bordered">
+                        <span class="modal-colon">:</span>
+                        <input type="number" id="modalBack" placeholder="後項" value="1" step="any" inputmode="decimal" class="bordered">
+                    </div>
+                    <button id="modalConfirmBtn" class="modal-btn bordered">✨ 確定目標 ✨</button>
+                    <div id="modalWarning" class="modal-warning"></div>
+                </div>
+            `;
+            document.body.appendChild(modalOverlay);
+
+            const frontInput = modalOverlay.querySelector('#modalFront');
+            const backInput = modalOverlay.querySelector('#modalBack');
+            const confirmBtn = modalOverlay.querySelector('#modalConfirmBtn');
+            const warningDiv = modalOverlay.querySelector('#modalWarning');
+
+            frontInput.step = "any";
+            frontInput.inputMode = "decimal";
+            backInput.step = "any";
+            backInput.inputMode = "decimal";
+            frontInput.focus();
+
+            const cleanModal = () => {
+                modalOverlay.remove();
+            };
+
+            const handleConfirm = () => {
+                let frontVal = frontInput.value.trim();
+                let backVal = backInput.value.trim();
+                if (frontVal === '' || backVal === '') {
+                    warningDiv.innerText = '請完整填寫前項和後項！';
+                    return;
+                }
+                const frontNum = Number(frontVal);
+                const backNum = Number(backVal);
+                if (isNaN(frontNum) || isNaN(backNum)) {
+                    warningDiv.innerText = '請輸入有效的數字（可為整數或小數）！';
+                    return;
+                }
+                if (backNum === 0) {
+                    warningDiv.innerText = '後項不能為 0，請重新輸入！';
+                    return;
+                }
+                cleanModal();
+                resolve({ front: frontNum, back: backNum });
+            };
+
+            confirmBtn.addEventListener('click', handleConfirm);
+            const onKeyPress = (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleConfirm();
+                }
+            };
+            frontInput.addEventListener('keypress', onKeyPress);
+            backInput.addEventListener('keypress', onKeyPress);
+        });
+    }
+
+    // 初始化新回合
+    async function initNewGameWithUserTarget() {
+        userFrontInput.value = '';
+        userBackInput.value = '';
+        newFrontInput.value = '';
+        newBackInput.value = '';
+        newRatioCard.style.display = 'none';
+        effectDiv.innerHTML = '';
+        recordList = [];
+        updateTableDisplay();
+        
+        const userTarget = await showTargetInputModal();
+        targetRatio = {
+            front: userTarget.front,
+            back: userTarget.back,
+            value: computeRatioValue(userTarget.front, userTarget.back)
+        };
+        
+        targetRatioDisplay.innerText = formatRatio(targetRatio.front, targetRatio.back);
+        targetRatioArea.style.display = 'block';
+        dynamicInputArea.style.display = 'block';
+        userInputCard.style.display = 'block';
+        tableWrapper.style.display = 'block';
+        currentSessionActive = true;
+        userFrontInput.focus();
+        
+        effectDiv.innerHTML = '<div style="background:#d9f0ec; border-radius:50px; padding:6px 20px; display:inline-block;">✨ 目標已設定，開始調配 ✨</div>';
+        setTimeout(() => {
+            if (effectDiv.innerHTML.includes("目標已設定")) effectDiv.innerHTML = '';
+        }, 1500);
+    }
+
+    function addRecord(targetStr, inputStr, isSuccess) {
+        recordList.push({
+            id: Date.now() + Math.random(),
+            targetStr: targetStr,
+            inputStr: inputStr,
+            isSuccess: isSuccess
+        });
+        updateTableDisplay();
+    }
+
+    function updateTableDisplay() {
+        if (!recordBody) return;
+        if (recordList.length === 0) {
+            recordBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">📋 還沒有製作記錄，快來調配藥方吧 📋</td></tr>`;
+            return;
+        }
+        let html = '';
+        recordList.forEach((rec, idx) => {
+            const successMark = rec.isSuccess ? '<span class="check-mark">✅</span>' : '<span class="fail-mark">❌</span>';
+            html += `<tr>
+                        <td>${idx + 1}</td>
+                        <td>${rec.targetStr}</td>
+                        <td>${rec.inputStr}</td>
+                        <td>${successMark}</td>
+                      </tr>`;
+        });
+        recordBody.innerHTML = html;
+    }
+
+    function showSuccessEffect() {
+        effectDiv.innerHTML = '<div class="success-effect">🎉 製藥成功！ 🧪✨</div>';
+        setTimeout(() => {
+            if (effectDiv.firstChild && effectDiv.firstChild.classList && effectDiv.firstChild.classList.contains('success-effect')) {
+                effectDiv.innerHTML = '';
+            }
+        }, 2000);
+    }
+
+    function showFailEffect() {
+        effectDiv.innerHTML = '<div class="fail-effect">😵 再試一試～ 💊</div>';
+        setTimeout(() => {
+            if (effectDiv.firstChild && effectDiv.firstChild.classList && effectDiv.firstChild.classList.contains('fail-effect')) {
+                effectDiv.innerHTML = '';
+            }
+        }, 1600);
+    }
+
+    // 核心驗證邏輯：不輸出任何比值相關敘述，只根據結果顯示成功/失敗特效
+    function validateAndRecord(front, back) {
+        if (!currentSessionActive || !targetRatio) {
+            showFailEffect();
+            return false;
+        }
+        
+        if (front === '' || back === '' || isNaN(front) || isNaN(back)) {
+            showFailEffect();
+            return false;
+        }
+        const frontNum = Number(front);
+        const backNum = Number(back);
+        if (isNaN(frontNum) || isNaN(backNum)) {
+            showFailEffect();
+            return false;
+        }
+        if (backNum === 0) {
+            showFailEffect();
+            return false;
+        }
+        
+        const inputRatioValue = computeRatioValue(frontNum, backNum);
+        const targetVal = targetRatio.value;
+        const isEqual = Math.abs(inputRatioValue - targetVal) < 1e-8;
+        
+        const targetStr = formatRatio(targetRatio.front, targetRatio.back);
+        const inputStr = formatRatio(frontNum, backNum);
+        
+        addRecord(targetStr, inputStr, isEqual);
+        
+        if (isEqual) {
+            showSuccessEffect();
+            if (newRatioCard.style.display !== 'block') {
+                newRatioCard.style.display = 'block';
+            }
+            return true;
+        } else {
+            showFailEffect();
+            if (newRatioCard.style.display !== 'block') {
+                newRatioCard.style.display = 'block';
+            }
+            return false;
+        }
+    }
+
+    // 第一次確認按鈕
+    function onFirstConfirm() {
+        if (!currentSessionActive) {
+            showFailEffect();
+            return;
+        }
+        let frontVal = userFrontInput.value.trim() === '' ? '' : userFrontInput.value;
+        let backVal = userBackInput.value.trim() === '' ? '' : userBackInput.value;
+        if (frontVal === '' || backVal === '') {
+            showFailEffect();
+            return;
+        }
+        const frontNum = Number(frontVal);
+        const backNum = Number(backVal);
+        if (isNaN(frontNum) || isNaN(backNum)) {
+            showFailEffect();
+            return;
+        }
+        validateAndRecord(frontNum, backNum);
+    }
+
+    // 新輸入框提交
+    function onNewRatioSubmit() {
+        if (!currentSessionActive) {
+            showFailEffect();
+            return;
+        }
+        let frontVal = newFrontInput.value.trim() === '' ? '' : newFrontInput.value;
+        let backVal = newBackInput.value.trim() === '' ? '' : newBackInput.value;
+        if (frontVal === '' || backVal === '') {
+            showFailEffect();
+            return;
+        }
+        const frontNum = Number(frontVal);
+        const backNum = Number(backVal);
+        if (isNaN(frontNum) || isNaN(backNum)) {
+            showFailEffect();
+            return;
+        }
+        validateAndRecord(frontNum, backNum);
+    }
+
+    // 開始製作
+    async function onStartMake() {
+        targetRatio = null;
+        currentSessionActive = false;
+        recordList = [];
+        updateTableDisplay();
+        targetRatioArea.style.display = 'none';
+        dynamicInputArea.style.display = 'none';
+        newRatioCard.style.display = 'none';
+        userInputCard.style.display = 'block';
+        userFrontInput.value = '';
+        userBackInput.value = '';
+        newFrontInput.value = '';
+        newBackInput.value = '';
+        effectDiv.innerHTML = '';
+        tableWrapper.style.display = 'block';
+        await initNewGameWithUserTarget();
+    }
+
+    // 綁定事件
+    startBtn.addEventListener('click', onStartMake);
+    confirmUserBtn.addEventListener('click', onFirstConfirm);
+    submitNewBtn.addEventListener('click', onNewRatioSubmit);
+
+    // 初始化數字輸入框支援小數鍵盤
+    setupDecimalInputs();
+
+    // 初始隱藏所有互動區塊，只顯示藥盒與開始按鈕
+    function initialUI() {
+        targetRatioArea.style.display = 'none';
+        dynamicInputArea.style.display = 'none';
+        tableWrapper.style.display = 'none';
+        recordList = [];
+        updateTableDisplay();
+        effectDiv.innerHTML = '';
+        currentSessionActive = false;
+        targetRatio = null;
+    }
+    initialUI();
+</script>
+</body>
+</html>
