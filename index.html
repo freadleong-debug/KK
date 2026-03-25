@@ -21,12 +21,12 @@
         }
 
         .workspace {
-            max-width: 1400px;
+            max-width: 1300px;
             width: 100%;
             background-color: #c3e8e0;
-            border-radius: 64px 48px 64px 48px;
+            border-radius: 56px 48px 56px 48px;
             box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255,255,255,0.6);
-            padding: 24px 28px 32px;
+            padding: 20px 24px 28px;
             transition: all 0.2s;
         }
 
@@ -50,8 +50,8 @@
             font-weight: bold;
             background: #ffde9c;
             border: none;
-            font-size: 1.1rem;
-            padding: 8px 20px;
+            font-size: 1rem;
+            padding: 8px 18px;
         }
         button:active {
             transform: translateY(2px);
@@ -62,133 +62,151 @@
             margin-bottom: 20px;
         }
         .title-area h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin: 0;
             display: inline-block;
-            padding: 12px 32px;
+            padding: 10px 28px;
             background: #fff1c1;
-            border-radius: 60px;
-            letter-spacing: 4px;
+            border-radius: 50px;
+            letter-spacing: 3px;
             color: #1f4e43;
-            text-shadow: 3px 3px 0 #b9d8ce;
-            box-shadow: 0 8px 0 #7c9f92;
+            text-shadow: 2px 2px 0 #b9d8ce;
+            box-shadow: 0 6px 0 #7c9f92;
         }
-        /* 操作提示放在大標題下方 */
         .operation-hint {
-            margin-top: 16px;
-            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-bottom: 6px;
             text-align: center;
         }
         .hint-badge {
             display: inline-block;
             background: #f9eec1;
-            border: 3px solid #548072;
-            border-radius: 60px;
-            padding: 8px 24px;
-            font-size: 1.1rem;
+            border: 2px solid #548072;
+            border-radius: 50px;
+            padding: 6px 20px;
+            font-size: 0.95rem;
             font-weight: bold;
             color: #2c5a4f;
-            box-shadow: 0 3px 0 #8faa9e;
-            backdrop-filter: blur(2px);
+            box-shadow: 0 2px 0 #8faa9e;
         }
         .hint-badge span {
-            margin-right: 8px;
-            font-size: 1.2rem;
+            margin-right: 6px;
+            font-size: 1rem;
         }
 
         .double-panel {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 24px;
+            margin-bottom: 30px;
+            align-items: stretch;
         }
         .left-panel {
-            flex: 1.2;
+            flex: 1;
             min-width: 240px;
+            max-width: 320px;
         }
         .right-panel {
-            flex: 1.8;
+            flex: 1.5;
             min-width: 280px;
         }
 
         .medicine-box {
             background: #ffeed5;
-            border-radius: 48px;
-            padding: 24px 20px;
+            border-radius: 40px;
+            padding: 20px 16px;
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .medicine-icon {
-            font-size: 4rem;
+            font-size: 3.2rem;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .start-btn {
             background: #f3b33d;
             color: #2d3e36;
-            font-size: 1.7rem;
-            padding: 12px 20px;
-            width: 80%;
-            border-radius: 60px;
+            font-size: 1.4rem;
+            padding: 10px 16px;
+            width: 85%;
+            border-radius: 50px;
             font-weight: bold;
-            letter-spacing: 2px;
-            box-shadow: 0 7px 0 #b4621a;
-            transition: 0.05s linear;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 0 #b4621a;
+            margin: 0 auto;
         }
         .start-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 3px 0 #b4621a;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b4621a;
+        }
+        .info-tip {
+            margin-top: 12px;
+            text-align: center;
+            font-style: italic;
+            background: #ddddb0;
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
         }
 
+        .right-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+        }
         .target-ratio-box {
             background: #f2e5cf;
-            padding: 18px;
-            border-radius: 48px;
+            padding: 16px;
+            border-radius: 40px;
             text-align: center;
         }
         .target-label {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             background: #d9c79a;
             display: inline-block;
-            padding: 6px 18px;
-            border-radius: 50px;
-            margin-bottom: 12px;
+            padding: 4px 16px;
+            border-radius: 40px;
+            margin-bottom: 10px;
         }
         .target-value {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: bold;
             background: white;
             display: inline-block;
-            padding: 8px 30px;
-            border-radius: 60px;
+            padding: 6px 24px;
+            border-radius: 50px;
             font-family: monospace;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             color: #2c6b5c;
         }
 
         .input-card {
             background: #fffaf0;
-            padding: 20px;
-            border-radius: 48px;
-            margin-bottom: 20px;
+            padding: 16px;
+            border-radius: 40px;
         }
         .ratio-input-group {
             display: flex;
             justify-content: center;
             align-items: baseline;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin: 15px 0;
+            margin: 12px 0;
         }
         .ratio-input-group input {
-            width: 130px;
-            font-size: 1.8rem;
+            width: 110px;
+            font-size: 1.5rem;
             text-align: center;
             border: 3px solid #548072;
-            border-radius: 40px;
+            border-radius: 36px;
             background: white;
-            padding: 8px 0;
+            padding: 6px 0;
             font-weight: bold;
             outline: none;
         }
@@ -200,96 +218,88 @@
             opacity: 0.5;
         }
         .ratio-colon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #3f6a5e;
         }
         .confirm-btn {
             background: #6ecfaa;
-            font-size: 1.3rem;
-            padding: 8px 32px;
-            border-radius: 60px;
-            margin-top: 8px;
+            font-size: 1.1rem;
+            padding: 6px 28px;
+            border-radius: 50px;
+            margin-top: 6px;
         }
 
         .effect-area {
-            min-height: 90px;
-            margin: 10px 0 20px;
+            min-height: 70px;
+            margin: 8px 0 16px;
             text-align: center;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: bold;
         }
         .success-effect {
             animation: sparkle 0.6s ease-in-out;
             background: radial-gradient(circle, gold, #ffb347);
             display: inline-block;
-            padding: 12px 28px;
-            border-radius: 60px;
+            padding: 10px 24px;
+            border-radius: 50px;
             color: #2d2b1f;
-            box-shadow: 0 0 20px #ffd966;
+            box-shadow: 0 0 18px #ffd966;
+            font-size: 1.4rem;
         }
         .fail-effect {
             animation: shake 0.4s ease-in-out;
             background: #f5b7a8;
             display: inline-block;
-            padding: 12px 28px;
-            border-radius: 60px;
+            padding: 10px 24px;
+            border-radius: 50px;
             color: #8b3c2c;
-            box-shadow: 0 0 10px #e67e5a;
+            box-shadow: 0 0 8px #e67e5a;
+            font-size: 1.4rem;
         }
         @keyframes sparkle {
             0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.2); background: #ffdd77; text-shadow: 0 0 8px white; }
+            50% { transform: scale(1.1); background: #ffdd77; }
             100% { transform: scale(1); opacity: 1; }
         }
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
         }
 
         .table-container {
             overflow-x: auto;
-            border-radius: 48px;
+            border-radius: 40px;
             background: #e5f3ef;
-            padding: 10px;
+            padding: 8px;
         }
         .record-table {
             width: 100%;
             border-collapse: collapse;
             background: #fef7e6;
-            border-radius: 32px;
+            border-radius: 28px;
             overflow: hidden;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
         .record-table th, .record-table td {
-            border: 3px solid #578f7f;
-            padding: 12px 8px;
+            border: 2px solid #578f7f;
+            padding: 8px 6px;
             text-align: center;
             font-weight: bold;
         }
         .record-table th {
             background: #c7e2d9;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #1f4e3c;
         }
         .check-mark {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             color: #2b7a42;
         }
         .fail-mark {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: #c95a49;
-        }
-
-        .info-tip {
-            margin-top: 10px;
-            text-align: center;
-            font-style: italic;
-            background: #ddddb0;
-            border-radius: 30px;
-            padding: 6px;
-            font-size: 0.95rem;
         }
 
         .modal-overlay {
@@ -308,80 +318,83 @@
         }
         .modal-card {
             background: #fff9ef;
-            border-radius: 64px;
-            padding: 28px 32px;
-            max-width: 450px;
+            border-radius: 56px;
+            padding: 24px 28px;
+            max-width: 420px;
             width: 90%;
             text-align: center;
             border: 4px solid #2c5a4f;
             box-shadow: 0 20px 35px rgba(0,0,0,0.3);
         }
         .modal-card h3 {
-            font-size: 2rem;
-            margin: 0 0 12px;
+            font-size: 1.8rem;
+            margin: 0 0 10px;
             color: #2d5a4c;
         }
         .modal-card p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            margin-bottom: 16px;
         }
         .modal-input-group {
             display: flex;
             justify-content: center;
             align-items: baseline;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 12px;
+            margin: 16px 0;
         }
         .modal-input-group input {
-            width: 130px;
-            font-size: 2rem;
+            width: 110px;
+            font-size: 1.6rem;
             text-align: center;
             border: 3px solid #548072;
-            border-radius: 48px;
-            padding: 8px;
+            border-radius: 40px;
+            padding: 6px;
             font-weight: bold;
         }
-        .modal-input-group input[type="number"] {
-            -moz-appearance: textfield;
-        }
         .modal-colon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
         }
         .modal-btn {
             background: #6ecfaa;
-            font-size: 1.4rem;
-            padding: 10px 28px;
-            margin-top: 12px;
-            border-radius: 48px;
+            font-size: 1.2rem;
+            padding: 8px 24px;
+            margin-top: 8px;
+            border-radius: 40px;
         }
         .modal-warning {
             color: #c95a49;
-            font-size: 0.9rem;
-            margin-top: 12px;
+            font-size: 0.85rem;
+            margin-top: 10px;
         }
 
-        @media (max-width: 800px) {
-            .workspace { padding: 18px; }
-            .target-value { font-size: 2rem; }
-            .ratio-input-group input { width: 100px; font-size: 1.4rem; }
-            .modal-input-group input { width: 100px; font-size: 1.6rem; }
-            .hint-badge { font-size: 0.9rem; padding: 6px 16px; }
+        @media (max-width: 750px) {
+            .workspace { padding: 16px; }
+            .target-value { font-size: 1.6rem; }
+            .ratio-input-group input { width: 85px; font-size: 1.2rem; }
+            .left-panel { max-width: 100%; }
+            .double-panel { flex-direction: column; }
+            .medicine-box { height: auto; }
         }
         footer {
             text-align: center;
-            font-size: 0.85rem;
-            margin-top: 16px;
+            font-size: 0.8rem;
+            margin-top: 14px;
             opacity: 0.8;
             color: #2c5a4f;
             background: #e0f0ea;
             display: inline-block;
             width: auto;
-            padding: 6px 20px;
-            border-radius: 40px;
+            padding: 4px 18px;
+            border-radius: 36px;
         }
         .footer-container {
             text-align: center;
+        }
+        .inline-tip {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            color: #4a6b5f;
         }
     </style>
 </head>
@@ -389,51 +402,45 @@
 <div class="workspace">
     <div class="title-area">
         <h1 class="bordered">🧪 製藥工作臺 🧴</h1>
-        <!-- 操作提示放在大標題下方，方便使用者了解操作 -->
         <div class="operation-hint">
-            <div class="hint-bordered hint-badge">
+            <div class="hint-badge">
                 <span>✨</span> 點擊開始製作，設定目標比，然後輸入調配比，看看是否成功 <span>✨</span>
             </div>
         </div>
     </div>
 
     <div class="double-panel">
+        <!-- 左側：藥盒 + 開始製作按鈕 -->
         <div class="left-panel">
             <div class="medicine-box bordered">
                 <div class="medicine-icon">💊🧪</div>
                 <button id="startMakeBtn" class="start-btn bordered">✨ 開始製作 ✨</button>
-                <div class="info-tip" style="margin-top:16px;">📌 點擊開始，設定目標比</div>
-            </div>
-
-            <div id="targetRatioArea" style="display: none;" class="target-ratio-box bordered">
-                <div class="target-label">🎯 今日目標比 🎯</div>
-                <div id="targetRatioDisplay" class="target-value">— : —</div>
+                <div class="info-tip">📌 點擊設定目標比，開始挑戰</div>
             </div>
         </div>
 
+        <!-- 右側：今日目標比 + 調配比輸入框 -->
         <div class="right-panel">
-            <div id="dynamicInputArea" style="display: none;">
-                <div id="userInputCard" class="input-card bordered">
-                    <div style="font-weight: bold; font-size:1.2rem; text-align:center;">🧙 請輸入您的配方比 🧙</div>
-                    <div class="ratio-input-group">
-                        <input type="number" id="userFront" placeholder="前項" value="" step="any" inputmode="decimal" class="bordered" style="background:white;">
-                        <span class="ratio-colon">:</span>
-                        <input type="number" id="userBack" placeholder="後項" value="" step="any" inputmode="decimal" class="bordered" style="background:white;">
-                    </div>
-                    <div style="text-align:center;">
-                        <button id="confirmUserRatioBtn" class="confirm-btn bordered">📝 確認輸入</button>
-                    </div>
+            <div class="right-stack">
+                <!-- 目標比區塊 (初始隱藏) -->
+                <div id="targetRatioArea" style="display: none;" class="target-ratio-box bordered">
+                    <div class="target-label">🎯 今日目標比 🎯</div>
+                    <div id="targetRatioDisplay" class="target-value">— : —</div>
                 </div>
 
-                <div id="newRatioCard" style="display: none;" class="input-card bordered">
-                    <div style="font-weight: bold; font-size:1.2rem; text-align:center;">⚗️ 再次調配新配方 ⚗️</div>
-                    <div class="ratio-input-group">
-                        <input type="number" id="newFront" placeholder="前項" value="" step="any" inputmode="decimal" class="bordered">
-                        <span class="ratio-colon">:</span>
-                        <input type="number" id="newBack" placeholder="後項" value="" step="any" inputmode="decimal" class="bordered">
-                    </div>
-                    <div style="text-align:center;">
-                        <button id="submitNewRatioBtn" class="confirm-btn bordered">🔬 提交新比</button>
+                <!-- 調配比輸入區塊 (初始隱藏) -->
+                <div id="dynamicInputArea" style="display: none;">
+                    <div id="userInputCard" class="input-card bordered">
+                        <div style="font-weight: bold; font-size:1.1rem; text-align:center;">🧙 調配比 🧙</div>
+                        <div class="ratio-input-group">
+                            <input type="number" id="userFront" placeholder="前項" value="" step="any" inputmode="decimal" class="bordered">
+                            <span class="ratio-colon">:</span>
+                            <input type="number" id="userBack" placeholder="後項" value="" step="any" inputmode="decimal" class="bordered">
+                        </div>
+                        <div style="text-align:center;">
+                            <button id="confirmUserRatioBtn" class="confirm-btn bordered">📝 確認輸入</button>
+                        </div>
+                        <div class="inline-tip" style="text-align:center;">💡 可以反覆輸入不同配方，每次都會記錄結果</div>
                     </div>
                 </div>
             </div>
@@ -445,12 +452,10 @@
     <div id="tableWrapper" style="display: none;" class="table-container bordered">
         <table class="record-table">
             <thead>
-                <tr><th>次數</th><th>目標比</th><th>使用者輸入比</th><th>製藥成功與否</th>
-                </tr>
-            </thead>
+                <tr><th>次數</th><th>目標比</th><th>輸入的調配比</th><th>製藥成功與否</th>
+                </thead>
             <tbody id="recordTableBody"></tbody>
-        </table>
-        <!-- 下方提示簡潔保留但不重複操作步驟，避免累贅 -->
+          </table>
         <div class="info-tip">📊 記錄每次調配結果，看看哪些配方能成功！</div>
     </div>
     <div class="footer-container">
@@ -469,22 +474,17 @@
     const targetRatioArea = document.getElementById('targetRatioArea');
     const targetRatioDisplay = document.getElementById('targetRatioDisplay');
     const dynamicInputArea = document.getElementById('dynamicInputArea');
-    const userInputCard = document.getElementById('userInputCard');
-    const newRatioCard = document.getElementById('newRatioCard');
     const confirmUserBtn = document.getElementById('confirmUserRatioBtn');
-    const submitNewBtn = document.getElementById('submitNewRatioBtn');
     const tableWrapper = document.getElementById('tableWrapper');
     const recordBody = document.getElementById('recordTableBody');
     const effectDiv = document.getElementById('effectMessage');
 
     const userFrontInput = document.getElementById('userFront');
     const userBackInput = document.getElementById('userBack');
-    const newFrontInput = document.getElementById('newFront');
-    const newBackInput = document.getElementById('newBack');
 
-    // 讓所有數字輸入框支援小數，並且彈出數字鍵盤 (已透過 inputmode="decimal" 和 step="any" 實現)
+    // 讓數字輸入框支援小數鍵盤
     function setupDecimalInputs() {
-        const numberInputs = [userFrontInput, userBackInput, newFrontInput, newBackInput];
+        const numberInputs = [userFrontInput, userBackInput];
         numberInputs.forEach(input => {
             if (input) {
                 input.step = "any";
@@ -493,17 +493,15 @@
         });
     }
 
-    // 計算比值 (支援小數)
+    // 計算比值
     function computeRatioValue(front, back) {
         if (back === 0 || back === null || isNaN(back)) return null;
         return front / back;
     }
 
     function formatRatio(front, back) {
-        // 格式化顯示，小數點保留合適精度
         const formatNum = (num) => {
             if (Number.isInteger(num)) return num.toString();
-            // 小數點後最多保留4位，去掉多餘尾數0
             let str = num.toFixed(6);
             str = str.replace(/\.?0+$/, '');
             return str;
@@ -511,7 +509,7 @@
         return `${formatNum(front)} : ${formatNum(back)}`;
     }
 
-    // 顯示目標比設定模態框 (支援小數輸入)
+    // 顯示目標比設定模態框
     function showTargetInputModal() {
         return new Promise((resolve) => {
             const modalOverlay = document.createElement('div');
@@ -583,9 +581,6 @@
     async function initNewGameWithUserTarget() {
         userFrontInput.value = '';
         userBackInput.value = '';
-        newFrontInput.value = '';
-        newBackInput.value = '';
-        newRatioCard.style.display = 'none';
         effectDiv.innerHTML = '';
         recordList = [];
         updateTableDisplay();
@@ -600,12 +595,11 @@
         targetRatioDisplay.innerText = formatRatio(targetRatio.front, targetRatio.back);
         targetRatioArea.style.display = 'block';
         dynamicInputArea.style.display = 'block';
-        userInputCard.style.display = 'block';
         tableWrapper.style.display = 'block';
         currentSessionActive = true;
         userFrontInput.focus();
         
-        effectDiv.innerHTML = '<div style="background:#d9f0ec; border-radius:50px; padding:6px 20px; display:inline-block;">✨ 目標已設定，開始調配 ✨</div>';
+        effectDiv.innerHTML = '<div style="background:#d9f0ec; border-radius:40px; padding:6px 18px; display:inline-block; font-size:1rem;">✨ 目標已設定，開始調配 ✨</div>';
         setTimeout(() => {
             if (effectDiv.innerHTML.includes("目標已設定")) effectDiv.innerHTML = '';
         }, 1500);
@@ -624,7 +618,7 @@
     function updateTableDisplay() {
         if (!recordBody) return;
         if (recordList.length === 0) {
-            recordBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">📋 還沒有製作記錄，快來調配藥方吧 📋</td></tr>`;
+            recordBody.innerHTML = `</table><td colspan="4" style="text-align:center;">📋 還沒有製作記錄，快來調配藥方吧 📋</td>;</tr>`;
             return;
         }
         let html = '';
@@ -658,7 +652,7 @@
         }, 1600);
     }
 
-    // 核心驗證邏輯：不輸出任何比值相關敘述，只根據結果顯示成功/失敗特效
+    // 核心驗證邏輯
     function validateAndRecord(front, back) {
         if (!currentSessionActive || !targetRatio) {
             showFailEffect();
@@ -691,21 +685,14 @@
         
         if (isEqual) {
             showSuccessEffect();
-            if (newRatioCard.style.display !== 'block') {
-                newRatioCard.style.display = 'block';
-            }
             return true;
         } else {
             showFailEffect();
-            if (newRatioCard.style.display !== 'block') {
-                newRatioCard.style.display = 'block';
-            }
             return false;
         }
     }
 
-    // 第一次確認按鈕
-    function onFirstConfirm() {
+    function onConfirmRatio() {
         if (!currentSessionActive) {
             showFailEffect();
             return;
@@ -725,28 +712,6 @@
         validateAndRecord(frontNum, backNum);
     }
 
-    // 新輸入框提交
-    function onNewRatioSubmit() {
-        if (!currentSessionActive) {
-            showFailEffect();
-            return;
-        }
-        let frontVal = newFrontInput.value.trim() === '' ? '' : newFrontInput.value;
-        let backVal = newBackInput.value.trim() === '' ? '' : newBackInput.value;
-        if (frontVal === '' || backVal === '') {
-            showFailEffect();
-            return;
-        }
-        const frontNum = Number(frontVal);
-        const backNum = Number(backVal);
-        if (isNaN(frontNum) || isNaN(backNum)) {
-            showFailEffect();
-            return;
-        }
-        validateAndRecord(frontNum, backNum);
-    }
-
-    // 開始製作
     async function onStartMake() {
         targetRatio = null;
         currentSessionActive = false;
@@ -754,12 +719,8 @@
         updateTableDisplay();
         targetRatioArea.style.display = 'none';
         dynamicInputArea.style.display = 'none';
-        newRatioCard.style.display = 'none';
-        userInputCard.style.display = 'block';
         userFrontInput.value = '';
         userBackInput.value = '';
-        newFrontInput.value = '';
-        newBackInput.value = '';
         effectDiv.innerHTML = '';
         tableWrapper.style.display = 'block';
         await initNewGameWithUserTarget();
@@ -767,13 +728,26 @@
 
     // 綁定事件
     startBtn.addEventListener('click', onStartMake);
-    confirmUserBtn.addEventListener('click', onFirstConfirm);
-    submitNewBtn.addEventListener('click', onNewRatioSubmit);
+    confirmUserBtn.addEventListener('click', onConfirmRatio);
 
-    // 初始化數字輸入框支援小數鍵盤
+    // Enter 快捷鍵
+    function setupEnterKey() {
+        const inputs = [userFrontInput, userBackInput];
+        inputs.forEach(input => {
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        onConfirmRatio();
+                    }
+                });
+            }
+        });
+    }
+
     setupDecimalInputs();
+    setupEnterKey();
 
-    // 初始隱藏所有互動區塊，只顯示藥盒與開始按鈕
     function initialUI() {
         targetRatioArea.style.display = 'none';
         dynamicInputArea.style.display = 'none';
